@@ -1,9 +1,45 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>AppIO</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<!--
+---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------- Page d'Acueil (Login) ------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+-->
+  <form (ngSubmit)="login()" [formGroup]="cred">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email est requis</span>
+        <span *ngIf="email.errors?.email">Email invalide !</span>
+      </div>
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Mot de Passe requis</span>
+        <span *ngIf="password.errors?.minlength">Mot de Passe doit contenir au moins 6 caract.</span>
+      </div>
+    </div>
 
+    <ion-button type="submit" expand="block" [disabled]="!cred.valid">Se Connecter</ion-button>
+    <ion-button type="button" expand="block" color="light" fill="clear">S'inscrire</ion-button>
+
+    <ion-button type="button" expand="block" color="tertiary">
+      <ion-icon name="logo-google" slot="start"></ion-icon>
+      Se Connecter avec Google
+    </ion-button>
+    <ion-button type="button" expand="block" color="tertiary">
+      <ion-icon name="logo-apple" slot="start"></ion-icon>
+      Se Connecter avec Apple
+    </ion-button>
+  </form>
 </ion-content>

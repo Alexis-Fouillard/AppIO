@@ -7,22 +7,21 @@ import {filter, map, take} from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AutoLoginGuard implements CanLoad {
 
   constructor(private authService: AuthenticationService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   canLoad(): Observable<boolean> {
     return this.authService.isAuthenticated.pipe(
-      filter(val => val !== null), //Filtre la valeur initiale de Behaviour.
+      filter(val => val !== null),
       take(1),
-      map( isAuthenticated => {
+      map(isAuthenticated => {
         if (isAuthenticated) {
-          return true;
+          //Permet de se connecter automatiquement si on c'est déjà connecter
+          this.router.navigateByUrl('/tabs', {replaceUrl: true});
         } else {
-          this.router.navigateByUrl('/login')
-          return false;
+          return true;
         }
       })
     );
