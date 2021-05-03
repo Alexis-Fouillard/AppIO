@@ -1,0 +1,11 @@
+ion-content
+{
+  --background: #fff url("../../../assets/img/fond.jpg") no-repeat center
+  center / cover;
+}
+ion-slides
+{
+  height: 100%;
+  --bullet-background-active: #fff;
+  --bullet-background: #000;
+}

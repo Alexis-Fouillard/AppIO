@@ -1,5 +1,8 @@
 {
   "name": "AppIO",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }
